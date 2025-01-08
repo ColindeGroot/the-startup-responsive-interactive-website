@@ -1,0 +1,125 @@
+body {
+    /* Font families */
+    --font-family-heading: "DIN 2014", sans-serif;
+    --font-family-body: "DIN 2014", sans-serif;
+    --font-family-details: "Andale Mono", monospace;
+
+    /* Font weights */
+    --font-weight-bold: 700;
+    --font-weight-demi: 600;
+    --font-weight-regular: 400;
+    --font-weight-light: 300;
+
+    /* Letter spacing */
+    --letter-spacing-standard: 0.03em;
+    --letter-spacing-details: 0em;
+
+    /* Heading sizes - Desktop */
+    --h1-size-desktop: 6em;
+    --h2-size-desktop: 4.5em;
+    --h3-size-desktop: 4em;
+    --h4-size-desktop: 3em;
+
+    /* Heading sizes - Tablet */
+    --h1-size-tablet: 4.5em;
+    --h2-size-tablet: 4em;
+    --h3-size-tablet: 3em;
+    --h4-size-tablet: 2.5em;
+
+    /* Heading sizes - Mobile */
+    --h1-size-mobile: 4em;
+    --h2-size-mobile: 3em;
+    --h3-size-mobile: 2em;
+    --h4-size-mobile: 2em;
+
+    /* Body text sizes - Desktop */
+    --body-l-size-desktop: 2em;
+    --body-m-size-desktop: 1.75em;
+    --body-s-size-desktop: 1.5em;
+    --details-text-size-desktop: 1.5em;
+
+    /* Body text sizes - Tablet */
+    --body-l-size-tablet: 1.75em;
+    --body-m-size-tablet: 1.5em;
+    --body-s-size-tablet: 1.25em;
+    --details-text-size-tablet: 1.25em;
+
+    /* Body text sizes - Mobile */
+    --body-l-size-mobile: 1.5em;
+    --body-m-size-mobile: 1.25em;
+    --body-s-size-mobile: 1em;
+    --details-text-size-mobile: 1em;
+
+    /* Button text sizes */
+    --button-text-size: 1em;
+
+    /* CTA text styles */
+    --cta-font-weight: var(--font-weight-demi);
+    --cta-letter-spacing: var(--letter-spacing-standard);
+
+    /* Responsive breakpoints */
+    --breakpoint-desktop: 75em;
+    --breakpoint-tablet: 48em;
+    --breakpoint-mobile: 30em;
+
+    --color-white: #FFFFFF;
+    --color-carolina-blue: #52A4D6;
+    --color-lapis-lazuli: #1D72A6;
+    --color-maastricht-blue: #082036;
+    --color-black: #0A0A0A;
+
+    /* Secundaire kleuren */
+    --color-light-lapis-lazuli: #D2E3ED;
+    --color-maya-blue: #72C1F2;
+    --color-cyan-blue-azure: #3C8FC2;
+    --color-dark-cerulean: #1A4973;
+    --color-space-cadet: #12314D;
+}
+
+h1 {
+    font-family: var(--font-family-heading);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--letter-spacing-standard);
+    font-size: var(--h1-size-desktop);
+}
+
+h2 {
+    font-family: var(--font-family-heading);
+    font-weight: var(--font-weight-demi);
+    letter-spacing: var(--letter-spacing-standard);
+    font-size: var(--h2-size-desktop);
+}
+
+button {
+    background-color: var(--color-carolina-blue);
+    color: var(--color-white);
+    border: 2px solid var(--color-dark-cerulean);
+  }
+  
+  button:hover {
+    background-color: var(--color-dark-cerulean);
+    border-color: var(--color-space-cadet);
+  }
+  
+
+/* Voor tablet */
+@media (max-width: var(--breakpoint-tablet)) {
+    h1 {
+        font-size: var(--h1-size-tablet);
+    }
+
+    h2 {
+        font-size: var(--h2-size-tablet);
+    }
+}
+
+/* Voor mobiel */
+@media (max-width: var(--breakpoint-mobile)) {
+    h1 {
+        font-size: var(--h1-size-mobile);
+    }
+
+    h2 {
+        font-size: var(--h2-size-mobile);
+    }
+}
