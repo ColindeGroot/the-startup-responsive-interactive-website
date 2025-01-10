@@ -12,19 +12,65 @@
 </head>
 
 <body>
+    <header>
+        <nav>
+            <button class="menu-toggle" aria-label="Toggle menu">&#9776;</button>
+            <ul>
+                <li>About</li>
+                <li>Features</li>
+                <li>Editor</li>
+                <li>Contact</li>
+            </ul>
+        </nav>
+    </header>
     <section class="cta">
         <h1>270 Degrees</h1>
-        <div viewer-cta> <!-- hier komt de viewer -->
-
+        <div class=" viewer viewer-cta">
+            <!-- load viewer -->
+            <div class="js-270viewer" data-270-model="hva-shoe"></div>
         </div>
+        <p>This is a product description. It will contain information about the product that will be show above.</p>
+        <a class="button button-cta">See more</a>
     </section>
-    <main>
-        <section>
-            <div class="viewer-hover"> <!-- nog een viewer -->
 
+    <main>
+
+        <section class="product-features">
+            
+            <div class="info-hover">
+                <ol>
+                    <li>
+                        <h3>1</h3>
+                        <p>Super comfortable for daily use</p>
+                	</li>
+
+                    <li>
+                        <h3>2</h3>
+                        <p>Stylish design</p>
+                    </li>
+
+                    <li>
+                        <h3>3</h3>
+                        <p></p>
+                    </li>
+                </ol>
             </div>
+
+            <div class="viewer viewer-hover">
+                <!-- nog een viewer -->
+                <div class="js-270viewer" data-270-model="hva-shoe"></div>
+            </div>
+
+        </section>
+
+        <section class="viewer customiser">
+            <div class="js-270viewer" data-270-model="hva-shoe" data-270-plugins="customiser"></div>
         </section>
     </main>
+    <!-- API KEY -->
+    <script>window.TSDAPIKEY = '645c0808-b5fb-4d15-8986-ffb6a267af2d';</script> <!-- api key -->
+    <script src="https://api.270degrees.nl/api/script/latest/viewer.js"></script> <!-- load viewer -->
+    <script src="https://api.270degrees.nl/api/script/latest/customiser.js"></script><!-- plugin customiser -->
 </body>
 
 </html>

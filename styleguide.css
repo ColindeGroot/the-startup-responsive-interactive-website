@@ -15,22 +15,17 @@ body {
     --letter-spacing-details: 0em;
 
     /* Heading sizes - Desktop */
-    --h1-size-desktop: 6em;
-    --h2-size-desktop: 4.5em;
-    --h3-size-desktop: 4em;
-    --h4-size-desktop: 3em;
+    --h1-size-desktop: 3em;
+    --h2-size-desktop: 2.5em;
+    --h3-size-desktop: 2em;
+    --h4-size-desktop: 1.8em;
 
-    /* Heading sizes - Tablet */
-    --h1-size-tablet: 4.5em;
-    --h2-size-tablet: 4em;
-    --h3-size-tablet: 3em;
-    --h4-size-tablet: 2.5em;
 
     /* Heading sizes - Mobile */
-    --h1-size-mobile: 4em;
-    --h2-size-mobile: 3em;
-    --h3-size-mobile: 2em;
-    --h4-size-mobile: 2em;
+    --h1-size-mobile: 3em;
+    --h2-size-mobile: 2em;
+    --h3-size-mobile: 1.5em;
+    --h4-size-mobile: 1.3em;
 
     /* Body text sizes - Desktop */
     --body-l-size-desktop: 2em;
@@ -60,7 +55,7 @@ body {
     /* Responsive breakpoints */
     --breakpoint-desktop: 75em;
     --breakpoint-tablet: 48em;
-    --breakpoint-mobile: 30em;
+    --breakpoint-mobile: 320px;
 
     --color-white: #FFFFFF;
     --color-carolina-blue: #52A4D6;
@@ -74,6 +69,8 @@ body {
     --color-cyan-blue-azure: #3C8FC2;
     --color-dark-cerulean: #1A4973;
     --color-space-cadet: #12314D;
+
+    font-family: var(--font-family-body);
 }
 
 h1 {
@@ -102,19 +99,8 @@ button {
   }
   
 
-/* Voor tablet */
-@media (max-width: var(--breakpoint-tablet)) {
-    h1 {
-        font-size: var(--h1-size-tablet);
-    }
-
-    h2 {
-        font-size: var(--h2-size-tablet);
-    }
-}
-
 /* Voor mobiel */
-@media (max-width: var(--breakpoint-mobile)) {
+@media (max-width:900px ) {
     h1 {
         font-size: var(--h1-size-mobile);
     }
@@ -122,4 +108,19 @@ button {
     h2 {
         font-size: var(--h2-size-mobile);
     }
+
+    h3 {
+        font-size: var(--h3-size-mobile);
+    }
+
+    h4 {
+        font-size: var(--h4-size-mobile);
+    }
+}
+
+.button{
+    padding: 1rem 2.5rem;
+    background-color: var(--color-cyan-blue-azure);
+    color: var(--color-white);
+    border-radius:0.8em;
 }
