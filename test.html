@@ -5,11 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <div class="myOwnDiv" data-270-plugins="customiser" style="width:60vw; height: 50vh;">hoi</div>
-
+    <section class="viewer">
+        <h1>test omgeving </h1>
+        <div class="myOwnDiv" data-270-plugins="customiser">hoi</div>
+        <div class="color-pick">
+            <button></button>
+            <button></button>
+            <button></button>
+        </div>
+    </section>
 
     <!-- API KEY -->
     <script>window.TSDAPIKEY = '645c0808-b5fb-4d15-8986-ffb6a267af2d';</script>
@@ -18,7 +26,16 @@
     <script src="https://api.270degrees.nl/api/script/latest/customiser.js"></script>
 
     <script>
+        const colorButtons = document.querySelector('.color-pick button')
         const $viewer = document.querySelector('.myOwnDiv'); //myOwnDiv een test div voor op de site met customizer
+
+        colorButtons.addEventListener('click', changeColor);
+
+        function changeColor() {
+            $viewer.setColor({ name: "logo", color: "green" });
+        }
+
+
         TSDViewer.create($viewer, {
 
             model: 'hva-lunchbox',
@@ -27,11 +44,34 @@
             onLoadComplete: () => {
                 console.log(this)
                 console.log($viewer)
-                $viewer.setColor({name:"logo", color:"red"});
+                $viewer.setColor({ name: "logo", color: "red" });
             },
 
         });
+
+
     </script>
+
+    <style>
+        .color-pick {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        button {
+            display: block;
+            height: 80px;
+            width: 80px;
+            background-color: aqua;
+            border-radius: 0.3em
+        }
+
+        button:hover {
+            cursor: pointer;
+        }
+    </style>
 
 </body>
 

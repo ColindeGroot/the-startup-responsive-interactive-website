@@ -21,28 +21,30 @@ TSDViewer.create($viewer,{
   }
 });
 
-function updateViewer(config) { //customizer test
-    
+
+
+  document.addEventListener('DOMContentLoaded', () => {
     const viewerContainer = document.getElementById('viewer-container');
-    viewerContainer.innerHTML = '';
-  
 
-    TSDViewer.create(viewerContainer, config);
-  }
-
-  document.getElementById('viewer-config-form').addEventListener('submit', function (e) {
-    e.preventDefault();
-  
-    const autorotate = document.getElementById('autorotate').value === 'true';
-
-    updateViewer({
-      autorotate: autorotate,
+    // Maak de viewer aan
+    TSDViewer.create(viewerContainer, {
+        model: 'hva-shoe',
+        plugins: 'customiser',
+        onLoadComplete: () => {
+            console.log('Viewer geladen en klaar voor gebruik');
+        }
     });
-  });
 
-  updateViewer({
-    autorotate: true,
-  });
+    // Koppel klikbare bolletjes aan kleurverandering
+    const colorCircles = document.querySelectorAll('.color-circle');
+    colorCircles.forEach(circle => {
+        circle.addEventListener('click', (e) => {
+            const selectedColor = e.target.getAttribute('data-color');
+            viewerContainer.setColor({ name: 'laces', color: selectedColor });
+            console.log(`Kleur veranderd naar: ${selectedColor}`);
+        });
+    });
+});
 
 
 
