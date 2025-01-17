@@ -55,34 +55,89 @@
 
             <div class="viewer viewer-hover">
                 <!-- Tweede viewer -->
-                <div class="js-270viewer hover-viewer" data-270-model="hva-shoe" data-270-zoom="false" data-270-rotate="true"
-                    data-270-autorotate-speed="0.2">
+                <div class="js-270viewer hover-viewer" data-270-model="hva-shoe" data-270-zoom="false"
+                    data-270-rotate="true" data-270-autorotate-speed="0.2">
                 </div>
             </div>
         </section>
 
-        <section class="viewer customizer">
-            <h2>Customiser</h2>
-            <div class="js-270viewer" data-270-plugins="customiser" id="viewer-editor" data-270-model="hva-shoe" data-270-zoom="false"></div>
-        
-            <!-- Kleurselectie -->
-            <div class="color-picker">
-                <div class="color-circle" data-color="green" style="background-color: green;"></div>
-                <div class="color-circle" data-color="red" style="background-color: red;"></div>
-                <div class="color-circle" data-color="blue" style="background-color: blue;"></div>
-                <div class="color-circle" data-color="black" style="background-color: black;"></div>
+        <section class="viewer">
+            <h2>Customizer</h2>
+            <div class="myOwnDiv" data-270-plugins="customiser"></div>
+            <div class="color-pick">
+                <button class="color-button"></button>
+                <button class="color-button"></button>
+                <button class="color-button"></button>
+            </div>
+            <div class="controls">
+                <button id="prev">Vorige</button>
+                <button id="next">Volgende</button>
             </div>
         </section>
     </main>
-    
+
+    <script>
+        const $viewerCustomise = document.querySelector('.myOwnDiv'); // Test div voor de viewer
+        const colorButtons = document.querySelectorAll('.color-pick button');
+
+        // slider buttons
+        const prevButton = document.getElementById('prev');
+        const nextButton = document.getElementById('next');
+
+        const colorSteps = [ //kleuren opties
+            { name: 'laces', colors: ['red', 'blue', 'green'] },
+            { name: 'badge', colors: ['purple', 'yellow', 'cyan'] },
+            { name: 'base', colors: ['orange', 'pink', 'brown'] }
+        ];
+
+        let currentStep = 0; // slider stappen plan. begin bij stap1
+
+        function updateColors() {
+            const { name, colors } = colorSteps[currentStep];
+            colorButtons.forEach((button, index) => {
+                button.style.backgroundColor = colors[index]; // Stel de kleuren in
+                button.onclick = () => changeColor(name, colors[index]); // Voeg een klikfunctie toe
+            });
+        }
+
+        // Verander de kleur van een object
+        function changeColor(name, color) {
+            $viewerCustomise.setColor({ name, color });
+        }
+
+        function changeView(cameraZoomLevel) {
+            $viewerCustomise.cameraZoomLevel()
+        }
+
+        // Navigatie tussen stappen
+        prevButton.addEventListener('click', () => {
+            currentStep = (currentStep - 1 + colorSteps.length) % colorSteps.length; // Ga naar de vorige stap
+            updateColors();
+        });
+
+        nextButton.addEventListener('click', () => {
+            currentStep = (currentStep + 1) % colorSteps.length; // Ga naar de volgende stap
+            updateColors();
+        });
+
+        TSDViewer.create($viewer, {
+            model: 'hva-shoe',
+            plugins: 'customizer',
+            onLoadComplete: () => {
+                console.log('Model geladen:', $viewerCustomise);
+                updateColors();
+            },
+        }); 
+    </script>
+
 
     <!-- API KEY -->
     <script>window.TSDAPIKEY = '645c0808-b5fb-4d15-8986-ffb6a267af2d';</script>
     <!-- Scripts van 270 Degrees -->
-    <script src="https://api.270degrees.nl/api/script/latest/viewer.js" ></script>
-    <script src="https://api.270degrees.nl/api/script/latest/customiser.js" ></script>
+    <script src="https://api.270degrees.nl/api/script/latest/viewer.js"></script>
+    <script src="https://api.270degrees.nl/api/script/latest/customiser.js"></script>
 
-    
+
 
 </body>
 

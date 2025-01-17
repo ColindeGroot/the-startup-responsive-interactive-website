@@ -10,12 +10,17 @@
 
 <body>
     <section class="viewer">
-        <h1>test omgeving </h1>
-        <div class="myOwnDiv" data-270-plugins="customiser">hoi</div>
+        <h1>Testomgeving</h1>
+        <p>Dit is de werkende test omgeving.</p>
+        <div class="myOwnDiv" data-270-plugins="customiser"></div>
         <div class="color-pick">
             <button></button>
             <button></button>
             <button></button>
+        </div>
+        <div class="controls">
+            <button id="prev">Vorige</button>
+            <button id="next">Volgende</button>
         </div>
     </section>
 
@@ -26,50 +31,101 @@
     <script src="https://api.270degrees.nl/api/script/latest/customiser.js"></script>
 
     <script>
-        const colorButtons = document.querySelector('.color-pick button')
-        const $viewer = document.querySelector('.myOwnDiv'); //myOwnDiv een test div voor op de site met customizer
+        const $viewer = document.querySelector('.myOwnDiv'); // Test div voor de viewer
+        const colorButtons = document.querySelectorAll('.color-pick button'); 
+         
+        // slider buttons
+        const prevButton = document.getElementById('prev'); 
+        const nextButton = document.getElementById('next'); 
 
-        colorButtons.addEventListener('click', changeColor);
 
-        function changeColor() {
-            $viewer.setColor({ name: "logo", color: "green" });
+        const colorSteps = [ //kleuren opties
+            { name: 'laces', colors: ['red', 'blue', 'green'] },
+            { name: 'badge', colors: ['purple', 'yellow', 'cyan'] },
+            { name: 'base', colors: ['orange', 'pink', 'gray'] }
+        ];
+
+        let currentStep = 0; // slider stappen plan. begin bij stap1
+
+        function updateColors() {
+            const { name, colors } = colorSteps[currentStep];
+            colorButtons.forEach((button, index) => {
+                button.style.backgroundColor = colors[index]; // Stel de kleuren in
+                button.onclick = () => changeColor(name, colors[index]); // Voeg een klikfunctie toe
+            });
         }
 
+        // Verander de kleur van een object
+        function changeColor(name, color) {
+            $viewer.setColor({ name, color });
+        }
 
-        TSDViewer.create($viewer, {
-
-            model: 'hva-lunchbox',
-            plugins: 'customizer',
-
-            onLoadComplete: () => {
-                console.log(this)
-                console.log($viewer)
-                $viewer.setColor({ name: "logo", color: "red" });
-            },
-
+        // Navigatie tussen stappen
+        prevButton.addEventListener('click', () => {
+            currentStep = (currentStep - 1 + colorSteps.length) % colorSteps.length; // Ga naar de vorige stap
+            updateColors();
         });
 
+        nextButton.addEventListener('click', () => {
+            currentStep = (currentStep + 1) % colorSteps.length; // Ga naar de volgende stap
+            updateColors();
+        });
 
+        TSDViewer.create($viewer, {
+            model: 'hva-shoe',
+            plugins: 'customizer',
+            onLoadComplete: () => {
+                console.log('Model geladen:', $viewer);
+                updateColors(); 
+            },
+        });
     </script>
 
     <style>
         .color-pick {
+            margin-top: 3em;
+            height: 15vh;
             display: flex;
             width: 100%;
             justify-content: center;
             gap: 2rem;
         }
 
-        button {
+        .color-pick button {
             display: block;
-            height: 80px;
-            width: 80px;
+            height: 55px;
+            width: 55px;
+            text-align: center;
             background-color: aqua;
-            border-radius: 0.3em
+            border-radius: 50%;
+            border: none;
+            transition: transform 0.3s;
         }
 
         button:hover {
             cursor: pointer;
+            transform: scale(1.1);
+        }
+
+        .controls {
+            margin-top: 2em;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .controls button {
+            padding: 1em 4em;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 0.4em;
+            cursor: pointer;
+        }
+
+        .controls button:hover {
+            background-color: #555;
         }
     </style>
 
