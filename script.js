@@ -5,41 +5,56 @@ menuToggle.addEventListener('click', () => {
     menu.classList.toggle('active');
 });
 
-const $viewer = document.querySelector('.myOwnDiv'); //myOwnDiv een test div voor op de site met customizer
-TSDViewer.create($viewer, {
+const $viewer = document.querySelector('.myOwnDiv'); // Test div voor de viewer
+const sections = document.querySelectorAll('.color-pick'); // Alle secties
+const prevButton = document.getElementById('prev'); // Vorige knop
+const nextButton = document.getElementById('next'); // Volgende knop
 
-    model: 'hva-shoe',
-    plugins: 'customizer',
+const colorSteps = [ // Kleuropties
+    { name: 'laces', colors: ['red', 'blue', 'green'] },
+    { name: 'badge', colors: ['purple', 'yellow', 'cyan'] },
+    { name: 'base', colors: ['orange', 'pink', 'gray'] }
+];
 
-    onLoadComplete: () => {
-        console.log($viewer)
-        $viewer.setColor({name: 'laces', color:'red'});
-    },
+let currentStep = 0; // Start bij de eerste stap
 
-    onCreate: () => {
-        console.log('viewer gemaakt');
-    }
+function updateSlider() {
+
+    sections.forEach((section, index) => {
+        section.hidden = index !== currentStep; // Toon alleen de huidige sectie
+    });
+
+    const { name, colors } = colorSteps[currentStep]; //update de buttons aan de hand van de huidige stap
+    const colorButtons = sections[currentStep].querySelectorAll('button');
+
+    colorButtons.forEach((button, index) => {
+        button.style.backgroundColor = colors[index]; // Geef de knop een kleur
+        button.onclick = () => changeColor(name, colors[index]); // Voeg klikfunctie toe
+    });
+}
+
+// Verander de kleur van een object in de viewer
+function changeColor(name, color) {
+    $viewer.setColor({ name, color });
+}
+
+// Navigatie tussen stappen
+prevButton.addEventListener('click', () => {
+    currentStep = (currentStep - 1 + colorSteps.length) % colorSteps.length; // Ga naar de vorige stap
+    updateSlider();
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-    const viewerContainer = document.getElementById('viewer-container');
+nextButton.addEventListener('click', () => {
+    currentStep = (currentStep + 1) % colorSteps.length; // Ga naar de volgende stap
+    updateSlider();
+});
 
-    // Maak de viewer aan
-    TSDViewer.create(viewerContainer, {
-        model: 'hva-shoe',
-        plugins: 'customiser',
-        onLoadComplete: () => {
-            console.log('Viewer geladen en klaar voor gebruik');
-        }
-    });
-
-    // Koppel klikbare bolletjes aan kleurverandering
-    const colorCircles = document.querySelectorAll('.color-circle');
-    colorCircles.forEach(circle => {
-        circle.addEventListener('click', (e) => {
-            const selectedColor = e.target.getAttribute('data-color');
-            viewerContainer.setColor({ name: 'laces', color: selectedColor });
-            console.log(`Kleur veranderd naar: ${selectedColor}`);
-        });
-    });
+// Initialiseer de viewer en de slider
+TSDViewer.create($viewer, {
+    model: 'hva-shoe',
+    plugins: 'customizer',
+    onLoadComplete: () => {
+        console.log('Model geladen:', $viewer);
+        updateSlider(); // Stel de slider in op de eerste stap
+    },
 });
