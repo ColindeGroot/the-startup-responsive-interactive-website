@@ -87,7 +87,7 @@ h2 {
     font-size: var(--h2-size-desktop);
 }
 
-button {
+/* button {
     background-color: var(--color-carolina-blue);
     color: var(--color-white);
     border: 2px solid var(--color-dark-cerulean);
@@ -97,7 +97,7 @@ button {
     background-color: var(--color-dark-cerulean);
     border-color: var(--color-space-cadet);
   }
-  
+   */
 
 /* Voor mobiel */
 @media (max-width:900px ) {

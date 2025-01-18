@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styleguide.css">
+</head>
+
+<body>
+    <section>
+        <h1>Testomgeving</h1>
+        <p>Dit is de werkende test omgeving.</p>
+    </section>
+    <section class="viewer">
+        <h2> Customise</h2>
+        <div class="myOwnDiv" data-270-plugins="customiser"></div>
+
+        <section aria-label="change lace color" class="color-pick">
+            <h3>Laces</h3>
+            <div class="colors-container laces">
+                <button></button>
+                <button></button>
+                <button></button>
+            </div>
+        </section>
+
+        <section aria-label="change badge color" class="color-pick" hidden>
+            <h3>logo</h3>
+            <div class="colors-container badge">
+                <button></button>
+                <button></button>
+                <button></button>
+            </div>
+        </section>
+
+        <section aria-label="change base color" class="color-pick" hidden>
+            <h3>Base</h3>
+            <div class="colors-container base">
+                <button></button>
+                <button></button>
+                <button></button>
+            </div>
+        </section>
+
+        <div class="controls">
+            <button id="prev">Vorige</button>
+            <button id="next">Volgende</button>
+        </div>
+    </section>
+
+    <!-- API KEY -->
+    <script>window.TSDAPIKEY = '645c0808-b5fb-4d15-8986-ffb6a267af2d';</script>
+    <!-- Scripts van 270 Degrees -->
+    <script src="https://api.270degrees.nl/api/script/latest/viewer.js"></script>
+    <script src="https://api.270degrees.nl/api/script/latest/customiser.js"></script>
+
+    <script>
+        const $viewer = document.querySelector('.myOwnDiv'); // Test div voor de viewer
+        const sections = document.querySelectorAll('.color-pick'); // Alle secties
+        const prevButton = document.getElementById('prev'); // Vorige knop
+        const nextButton = document.getElementById('next'); // Volgende knop
+
+        const colorSteps = [ // Kleuropties
+            { name: 'laces', colors: ['red', 'blue', 'green'] },
+            { name: 'logo', colors: ['purple', 'yellow', 'cyan'] },
+            { name: 'base', colors: ['orange', 'pink', 'gray'] }
+        ];
+
+        let currentStep = 0; // Start bij de eerste stap
+
+   
+        function updateSlider() {
+          
+            sections.forEach((section, index) => {
+                section.hidden = index !== currentStep; // Toon alleen de huidige sectie
+            });
+
+         
+            const { name, colors } = colorSteps[currentStep]; //update de buttons aan de hand van de huidige stap
+            const colorButtons = sections[currentStep].querySelectorAll('button');
+            
+            colorButtons.forEach((button, index) => {
+                button.style.backgroundColor = colors[index]; // Geef de knop een kleur
+                button.onclick = () => changeColor(name, colors[index]); // Voeg klikfunctie toe
+            });
+        }
+
+        // Verander de kleur van een object in de viewer
+        function changeColor(name, color) {
+            $viewer.setColor({ name, color });
+        }
+
+        // Navigatie tussen stappen
+        prevButton.addEventListener('click', () => {
+            currentStep = (currentStep - 1 + colorSteps.length) % colorSteps.length; // Ga naar de vorige stap
+            updateSlider();
+        });
+
+        nextButton.addEventListener('click', () => {
+            currentStep = (currentStep + 1) % colorSteps.length; // Ga naar de volgende stap
+            updateSlider();
+        });
+
+        // Initialiseer de viewer en de slider
+        TSDViewer.create($viewer, {
+            model: 'hva-shoe',
+            plugins: 'customizer',
+            onLoadComplete: () => {
+                console.log('Model geladen:', $viewer);
+                updateSlider(); // Stel de slider in op de eerste stap
+            },
+        });
+
+    </script>
+</body>
+
+</html>
