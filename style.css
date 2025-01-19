@@ -11,16 +11,6 @@ body {
     --font-family-body: "DIN 2014", sans-serif;
     --font-family-details: "Andale Mono", monospace;
 
-    /* Font weights */
-    --font-weight-bold: 700;
-    --font-weight-demi: 600;
-    --font-weight-regular: 400;
-    --font-weight-light: 300;
-
-    /* Letter spacing */
-    --letter-spacing-standard: 0.03em;
-    --letter-spacing-details: 0em;
-
     /* Heading sizes - Desktop */
     --h1-size-desktop: 3em;
     --h2-size-desktop: 2.5em;
@@ -37,26 +27,19 @@ body {
     --body-l-size-desktop: 2em;
     --body-m-size-desktop: 1.75em;
     --body-s-size-desktop: 1.5em;
-    --details-text-size-desktop: 1.5em;
 
     /* Body text sizes - Tablet */
     --body-l-size-tablet: 1.75em;
     --body-m-size-tablet: 1.5em;
     --body-s-size-tablet: 1.25em;
-    --details-text-size-tablet: 1.25em;
 
     /* Body text sizes - Mobile */
     --body-l-size-mobile: 1.5em;
     --body-m-size-mobile: 1.25em;
     --body-s-size-mobile: 1em;
-    --details-text-size-mobile: 1em;
 
     /* Button text sizes */
     --button-text-size: 1em;
-
-    /* CTA text styles */
-    --cta-font-weight: var(--font-weight-demi);
-    --cta-letter-spacing: var(--letter-spacing-standard);
 
     /* Responsive breakpoints */
     --breakpoint-desktop: 75em;
@@ -67,30 +50,30 @@ body {
     --color-carolina-blue: #52A4D6;
     --color-lapis-lazuli: #1D72A6;
     --color-maastricht-blue: #082036;
-    --color-black: #0A0A0A;
-
-    /* Secundaire kleuren */
+    --color-black: #0A0A0A; 
+    --color-space-cadet: #12314D;
     --color-light-lapis-lazuli: #D2E3ED;
     --color-maya-blue: #72C1F2;
     --color-cyan-blue-azure: #3C8FC2;
     --color-dark-cerulean: #1A4973;
-    --color-space-cadet: #12314D;
 
     font-family: var(--font-family-body);
 }
 
 h1 {
-    font-family: var(--font-family-heading);
-    font-weight: var(--font-weight-bold);
-    letter-spacing: var(--letter-spacing-standard);
     font-size: var(--h1-size-desktop);
 }
 
 h2 {
-    font-family: var(--font-family-heading);
-    font-weight: var(--font-weight-demi);
-    letter-spacing: var(--letter-spacing-standard);
     font-size: var(--h2-size-desktop);
+}
+
+h3 {
+    font-size: var(--h3-size-desktop);
+}
+
+h4 {
+    font-size: var(--h4-size-desktop);
 }
 
 /* button {
@@ -131,14 +114,28 @@ h2 {
     border-radius:0.8em;
 } */
 
+button {
+    padding: 0.8em 3em;
+    text-align: center;
+    background-color: var(--color-white);
+    color: var(--color-maastricht-blue);
+    border: 2px var(--color-maastricht-blue) solid;
+    border-radius: 0.4em;
+    font-weight: 700;
+    font-size: 1em;
+    cursor: pointer;
+}
 
+/* algemene styling */
 
 header {
-    background-color: var(--color-lapis-lazuli);
+    background-color: var(--color-space-cadet);
     padding: 1rem;
 }
 
 nav {
+    height: 5em;
+    position: relative;
     @media (min-width:768px) {
         display: flex;
         align-items: center;
@@ -147,6 +144,7 @@ nav {
 }
 
 .menu-toggle {
+    z-index: 999;
     display: block;
     font-size: 1.5rem;
     background: none;
@@ -160,16 +158,22 @@ ul {
     display: none;
     flex-direction: column;
     gap: 1rem;
+
+    li {
+        font-weight: ;
+        text-align: center;
+        font-size: 1.5em;
+        color: var(--color-white);
+    }
 }
 
 ul.active {
+    position: absolute;
     display: flex;
-}
-
-
-ul li {
-    text-align: center;
-    color: var(--color-white);
+    background-color: var(--color-white);
+    li{
+        color: var(--color-space-cadet);
+    }
 }
 
 li:hover {
@@ -190,15 +194,7 @@ li:hover {
     }
 }
 
-.TSD-3d-indicator {
-    display: none;
-}
-
-canvas{
-    width:100%;
-}
-
-.cta {
+.cta{
     display: flex;
     gap: 0.8em;
     flex-direction: column;
@@ -209,8 +205,17 @@ canvas{
 }
 
 .viewer{
-    height: 30vh;
-    width: auto;
+    height: 40vh;
+    width: 100%;
+}
+
+.TSD-3d-indicator {
+    display: none;
+}
+
+canvas{
+    width:100%!important;
+    height: 100%!important;
 }
 
 .product-features { /*hover viewer*/
@@ -258,26 +263,17 @@ canvas{
 
 /*customizer viewer*/
 .viewer-customiser{
-    height: 30vh;
+    height: 50vh;
     width: 100%;
+
+    canvas{
+        height: 20vh;
+    }
 }
 
-.color-button {
-    display: block;
-    height: 40px;
-    width: 40px;
-    border-radius: 50%;
-    border: none;
-    transition: transform 0.3s;
-}
-
-.controls {
-    padding:1em 0 3em 0;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
+.customise-options{
+    padding: 0.5em 0;
+    background-color: var(--color-lapis-lazuli);
 }
 
 .color-pick {
@@ -294,6 +290,7 @@ canvas{
     }
 
     button {
+        padding: 0;
         display: block;
         height: 55px;
         width: 55px;
@@ -310,19 +307,19 @@ canvas{
 }
 
 [hidden] {
-    display: none !important;
+    display: none;
 }
 
-.controls button {
-    padding: 1em 4em;
-    margin: auto;
-    text-align: center;
-    background-color: black;
-    color: #fff;
-    border: none;
-    border-radius: 0.4em;
-    cursor: pointer;
+.controls {
+    padding:1em 0 3em 0;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
 }
+
+
 
 /* .controls button:nth-child(1)::before {
     content: "";
@@ -335,6 +332,4 @@ canvas{
     rotate:90deg;
 } */
 
-.controls button:hover {
-    background-color: #555;
-}
+/* end viewer customizer */
