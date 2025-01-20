@@ -15,10 +15,10 @@
         <nav>
             <button class="menu-toggle" aria-label="Toggle menu">&#9776;</button>
             <ul>
-                <li>About</li>
-                <li>Features</li>
-                <li>Editor</li>
-                <li>Contact</li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#editor">Editor</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
     </header>
@@ -26,25 +26,29 @@
     <main>
         <section class="cta">
             <h1>270 Degrees</h1>
+
             <div class="viewer viewer-cta">
                 <!-- Eerste viewer -->
                 <div class="js-270viewer" data-270-model="hva-shoe" data-270-autorotate="true" data-270-zoom="false"
                     data-270-background="#fff">
                 </div>
             </div>
+
             <p>This is a product description. It will contain information about the product that will be show above.</p>
-            <a class="button button-cta">See more</a>
+            <a href="#viewer" class="button button-cta">See more</a>
         </section>
 
         <section class="viewer-customiser">
             <h2> Customise</h2>
-            <div class="myOwnDiv" data-270-plugins="customiser" data-270-zoom="false" data-270-background="#fff"></div>
+            <div class="myOwnDiv" data-270-plugins="customiser" data-270-zoom="false" data-270-background="#ececec"></div>
 
             <div class="customise-options">
                 <!-- buttons setColor  -->
                 <section aria-label="change lace color" class="color-pick">
                     <h3>Laces</h3>
                     <div class="colors-container laces">
+                        <button></button>
+                        <button></button>
                         <button></button>
                         <button></button>
                         <button></button>
@@ -57,12 +61,16 @@
                         <button></button>
                         <button></button>
                         <button></button>
+                        <button></button>
+                        <button></button>
                     </div>
                 </section>
 
                 <section aria-label="change base color" class="color-pick" hidden>
                     <h3>Base</h3>
                     <div class="colors-container base">
+                        <button></button>
+                        <button></button>
                         <button></button>
                         <button></button>
                         <button></button>
@@ -78,7 +86,7 @@
 
         </section>
     </main>
-
+    
     <!-- scripts onderin laden anders werkt de viewer niet in combinatie met css (defer werkt niet met de viewer om een of andere reden) -->
     <!-- API KEY -->
     <script>window.TSDAPIKEY = '645c0808-b5fb-4d15-8986-ffb6a267af2d';</script>

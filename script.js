@@ -15,17 +15,17 @@ const nextButton = document.getElementById('next'); // Volgende knop
 const colorSteps = [
     { 
         name: 'laces', 
-        colors: ['red', 'blue', 'green'],
+        colors: ['red', 'blue', 'green', 'pink', 'cyan'],
         cameraPosition: '45,45' // Diagonaal bovenaanzicht
     },
     { 
         name: 'badge', 
-        colors: ['purple', 'yellow', 'cyan'],
+        colors: ['purple', 'yellow', 'cyan', 'gold', 'black'],
         cameraPosition: '0,90' // Frontale hoek
     },
     { 
         name: 'base', 
-        colors: ['orange', 'pink', 'gray'],
+        colors: ['black', 'white', 'orange', 'pink', 'gray'],
         cameraPosition: '90,90' // Rechterkant
     }
 ];
